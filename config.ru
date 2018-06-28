@@ -2,6 +2,7 @@
 
 require './lib/app'
 
-use Rack::Reloader, 0
+use Rack::Reloader
+use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'
 
 run Rack::Cascade.new([Rack::File.new('public'), App])

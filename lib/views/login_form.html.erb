@@ -1,12 +1,16 @@
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <form action="/" method="post" name="login-form" class="text-center" id="login-form">
-      <div class="form-group">
-        <input type="text" name = "player" class="form-control" placeholder="Input your name:" autofocus required >
+    <div class="row">
+      <div class="col">
+        <div class="login-form-wrapper">
+          <form action="/" method="post" class="login-form">
+            <div class="form-group text-center">
+              <h4>Welcome to Codebreaker!</h4>
+              <img class="logo" src="/img/jigsaw.png" alt="" width="72" height="72">
+              <p>I want to play a game</p>
+              <input type="text" class="form-control" name="player_name" placeholder="Enter your name..." autofocus required>
+              <small id="loginHelp" class="form-text text-muted">For start game enter your name and submit form</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Let's play</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <input type="submit" class="btn btn-success" value="Start a new game">
-      </div>
-    </form>
-  </div>
-</div>
+    </div>
