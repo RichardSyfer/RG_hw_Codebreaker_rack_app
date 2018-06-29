@@ -3,13 +3,24 @@
                 <div class="container">
                   <div class="row">
                     <div class="col">
-                      <input type="text" class="form-control" name="hint" id="hint" placeholder="* * * *" readonly>
-                      <small id="hintHelp" class="form-text text-muted">You have 6 hints left.</small>
+                      <input type="text" id="hint" class="form-control"
+                        name="hint"
+                        value="<%= @request.session[:hint] %>"
+                        placeholder="* * * *" readonly>
+                      <small id="hintHelp" class="form-text text-muted">
+                        <% if game.hints_count <= 0 %>
+                          No hints left
+                        <% else %>
+                          You have <%= game.hints_count %> hints left.
+                        <% end %>
+                      </small>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-6 offset-0">
-                      <button type="submit" class="btn btn-primary btn-block">Hint</button>
+                      <button type="submit"
+                        class="btn btn-primary btn-block"
+                        <%= 'disabled' if game.hints_count <= 0 %>>Hint</button>
                     </div>
                   </div>
                 </div>

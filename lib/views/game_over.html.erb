@@ -1,0 +1,25 @@
+    <div class="row">
+      <div class="col text-center">
+      <% if game.won? %>
+        <h5>Superb game! You won, <b><%= player_name %></b></h5>
+      <% else %>
+        <h5>
+          Sorry, <b><%= player_name %></b>, but you lost :(  <br>
+          code was <b><%= game.secret %></b>
+        </h5>
+      <% end %>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 offset-3">
+        <form action="/save" method="post" id="save-form">
+          <input type="submit" value="Save results" class="btn btn-primary btn-block"/>
+        </form>
+      </div>
+      <div class="col-3">
+        <form action="/restart" method="get" id="restart-form">
+          <input type="submit" value="Restart game" class="btn btn-primary btn-block"/>
+        </form>
+      </div>
+    </div>

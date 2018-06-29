@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require 'erb'
-require 'codebreaker/game'
+require 'codebreaker'
+require_relative 'game_session_vars'
 
 class App
+  include GameSessionVars
   def self.call(env)
     new(env).response.finish
   end
@@ -16,37 +18,44 @@ class App
     case @request.path
     when '/' then index
     when '/check' then check_guess
+    when '/hint' then show_hint
+    when '/restart' then game_restart
+    # when '/save' then save_game_result
     else Rack::Response.new('Not found', 404)
     end
   end
 
   private
 
-  def player_name
-    @request.session[:player_name]
-  end
-
-  def player_name_set(name)
-    @request.session[:player_name] = name
-  end
-
   def index
     if @request.params['player_name']
-      @request.session[:game] = Codebreaker::Game.new(player_name) unless @request.session[:game]
-      player_name_set(@request.params['player_name']) unless @request.session[:player_name]
+      self.player_name = @request.params['player_name'] unless player_name
+      self.game = Codebreaker::Game.new(player_name) unless game
+      game.start
     end
     Rack::Response.new(render 'index')
   end
 
   def check_guess
-    # @request.session[:game].make_attempt(@request.params['breaker_code'])
+    self.guess = @request.params['breaker_code']
+    game.make_attempt(guess)
     add_to_log
-    redirect '/'
+    redirect_to '/'
   end
 
   def add_to_log
-    @request.session[:history] = @request.session[:history] || []
-    @request.session[:history] << [@request.session[:guess], @request.session[:game].attempt_result]
+    self.game_log = game_log || []
+    game_log << [guess, game.attempt_result]
+  end
+
+  def show_hint
+    self.hint = game.hint
+    redirect_to '/'
+  end
+
+  def game_restart
+    @request.session.clear
+    redirect_to '/'
   end
 
   def render(template)
@@ -54,9 +63,9 @@ class App
     ERB.new(File.read(path)).result(binding)
   end
 
-  def redirect(path)
+  def redirect_to(path)
     Rack::Response.new do |response|
-      response.redirect("#{path}")
+      response.redirect(path.to_s)
     end
   end
 end
