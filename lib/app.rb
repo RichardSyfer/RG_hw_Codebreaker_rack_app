@@ -44,18 +44,18 @@ class App
 
   def check_guess
     self.guess = @request.params['breaker_code']
-    game.make_attempt(guess)
+    game&.make_attempt(guess)
     add_to_log
     redirect_to '/'
   end
 
   def add_to_log
     self.game_log = game_log || []
-    game_log << [guess, game.attempt_result]
+    game_log << [guess, game&.attempt_result]
   end
 
   def show_hint
-    self.hint = game.hint
+    self.hint = game&.hint
     redirect_to '/'
   end
 
@@ -66,7 +66,7 @@ class App
 
   def save_game_result
     scores_log = YAML.load_file(File.open(@game_data_file_path, 'r')) || []
-    scores_log[scores_log.count + 1] = game.game_data
+    scores_log[scores_log.count + 1] = game&.game_data
     File.open(@game_data_file_path, 'w') { |f| f.write YAML.dump(scores_log.compact) }
     @request.session.clear
     redirect_to '/scores'
