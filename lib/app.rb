@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
 require 'erb'
+require 'yaml'
 require 'codebreaker'
 require_relative 'game_session_vars'
 
 class App
   include GameSessionVars
+  attr_reader :scores
+
   def self.call(env)
     new(env).response.finish
   end
 
   def initialize(env)
     @request = Rack::Request.new(env)
+    @game_data_file_path = File.join(__dir__, 'game_data.yml')
+    @scores = {}
   end
 
   def response
@@ -20,7 +25,8 @@ class App
     when '/check' then check_guess
     when '/hint' then show_hint
     when '/restart' then game_restart
-    # when '/save' then save_game_result
+    when '/save' then save_game_result
+    when '/scores' then show_scores
     else Rack::Response.new('Not found', 404)
     end
   end
@@ -56,6 +62,19 @@ class App
   def game_restart
     @request.session.clear
     redirect_to '/'
+  end
+
+  def save_game_result
+    scores_log = YAML.load_file(File.open(@game_data_file_path, 'r')) || []
+    scores_log[scores_log.count + 1] = game.game_data
+    File.open(@game_data_file_path, 'w') { |f| f.write YAML.dump(scores_log.compact) }
+    @request.session.clear
+    redirect_to '/scores'
+  end
+
+  def show_scores
+    @scores = YAML.load_file(File.open(@game_data_file_path, 'r')) if File.file?(@game_data_file_path)
+    Rack::Response.new(render 'game_scores')
   end
 
   def render(template)
