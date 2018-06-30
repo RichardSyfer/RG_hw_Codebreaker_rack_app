@@ -35,7 +35,7 @@ class App
 
   def index
     if @request.params['player_name']
-      self.player_name = @request.params['player_name'] unless player_name
+      self.player_name = @request.params['player_name'].strip unless player_name
       self.game = Codebreaker::Game.new(player_name) unless game
       game.start
     end
