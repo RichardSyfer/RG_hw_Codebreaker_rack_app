@@ -27,3 +27,10 @@
   :attempt_result: "++++"
   :attempts: '8'
   :hints_left: 3
+- :game_date: '2018-06-30'
+  :player_name: ben
+  :result: lost
+  :secret_code: '2154'
+  :attempt_result: ''
+  :attempts: '10'
+  :hints_left: 3

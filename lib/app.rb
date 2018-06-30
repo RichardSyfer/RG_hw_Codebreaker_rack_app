@@ -27,7 +27,7 @@ class App
     when '/restart' then game_restart
     when '/save' then save_game_result
     when '/scores' then show_scores
-    else Rack::Response.new('Not found', 404)
+    else Rack::Response.new(render('404'), 404)
     end
   end
 
