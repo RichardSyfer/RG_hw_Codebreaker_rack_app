@@ -7,7 +7,7 @@ body::after {
   content: "";
   background-image: url("../img/bike.png");
   background-repeat: no-repeat;
-  opacity: .04;
+  opacity: 0.04;
   top: 40%;
   left: 80%;
   bottom: 0;
@@ -16,7 +16,8 @@ body::after {
   z-index: -1;
 }
 
-.login-form-wrapper {
+.login-form-wrapper,
+.block-404-wrapper {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -31,6 +32,10 @@ body::after {
   width: 100%;
   max-width: 330px;
   padding: 15px;
+}
+
+.block-404 {
+  max-width: 500px;
 }
 
 .header {

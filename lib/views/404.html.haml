@@ -4,9 +4,12 @@
     %title Codebreaker
     %link{ rel: 'shortcut icon', href: 'img/favicon/favicon.ico', type: 'image/x-icon' }
     %link{ rel: 'stylesheet', href: '/stylesheets/bootstrap.min.css', type: 'text/css' }
+    %link{ rel: 'stylesheet', href: '/stylesheets/main.css', type: 'text/css' }
   %body{ style: 'background-color:#fff;' }
     .container
       .row
         .col.text-center
-          %img{ src: '../img/404.png', alt: 'Page not found. 404' }
-          %a{ href:'/', class: 'btn btn-danger btn-block' } Let's go play?
+          .block-404-wrapper
+            .block-404
+              %img{ src: '../img/404.png', alt: 'Page not found. 404' }
+              %a{ href:'/', class: 'btn btn-danger btn-block' } Let's go play?
