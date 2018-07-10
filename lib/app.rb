@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'erb'
+require 'haml'
 require 'yaml'
 require 'codebreaker'
 require_relative 'game_session_vars'
@@ -78,8 +78,8 @@ class App
   end
 
   def render(template)
-    path = File.expand_path("../views/#{template}.html.erb", __FILE__)
-    ERB.new(File.read(path)).result(binding)
+    path = File.expand_path("../views/#{template}.html.haml", __FILE__)
+    Haml::Engine.new(File.read(path)).render(binding)
   end
 
   def redirect_to(path)

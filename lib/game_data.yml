@@ -34,3 +34,10 @@
   :attempt_result: ''
   :attempts: '10'
   :hints_left: 3
+- :game_date: '2018-07-10'
+  :player_name: nasm
+  :result: lost
+  :secret_code: '3126'
+  :attempt_result: "+-"
+  :attempts: '10'
+  :hints_left: 0

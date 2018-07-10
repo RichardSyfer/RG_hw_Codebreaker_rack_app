@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Codebreaker
+    %link{ rel: 'shortcut icon', href: 'img/favicon/favicon.ico', type: 'image/x-icon' }
+    %link{ rel: 'stylesheet', href: '/stylesheets/bootstrap.min.css', type: 'text/css' }
+    %link{ rel: 'stylesheet', href: '/stylesheets/main.css', type: 'text/css' }
+  %body
+    .container
+      - if player_name
+        .row
+          .col
+            .header.text-center
+              %h4 Codebreaker
+              %img{ class: 'logo',
+                    src: '/img/jigsaw.png',
+                    alt: 'I want to play a game',
+                    width: '72',
+                    height: '72' }
+        - if game.game_over?
+          = render 'game_over'
+        - else
+          .row
+            .col
+              .row
+                .col-md-6
+                  = render 'game_form'
+                .col-md-6
+                  = render 'hint_form'
+          .row
+            .col
+              = render 'game_log'
+      - else
+        = render 'login_form'
+
+

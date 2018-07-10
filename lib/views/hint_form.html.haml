@@ -1,0 +1,23 @@
+%form{ action: '/hint', method: 'post', class: 'hint-form' }
+  .form-group.text-center
+    .container
+      .row
+        .col
+          %input{ id: 'hint',
+                  class: 'form-control',
+                  type: 'text',
+                  name: 'hint',
+                  value: @request.session[:hint],
+                  placeholder: '* * * *',
+                  readonly: 'true' }
+          %small{ id: 'hintHelp', class: 'form-text text-muted' }
+            - if game.hints_count <= 0
+              = "No hints left"
+            - else
+              = "You have #{ game.hints_count } hints left."
+      .row
+        .col-6
+          %button{  type: 'submit',
+                    class: 'btn btn-primary btn-block',
+                    disabled: game.hints_count <= 0  }
+            Hint

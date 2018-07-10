@@ -1,0 +1,19 @@
+.row
+  .col
+    .login-form-wrapper
+      %form{ class: 'login-form', action: '/', method: 'post' }
+        .form-group.text-center
+          %h4 Welcome to Codebreaker!
+          %img{ class: 'logo', src: '/img/jigsaw.png', width: '72', height: '72' }
+          %p I want to play a game
+          %input{ class: 'form-control',
+                  type: 'text',
+                  name: 'player_name',
+                  placeholder: 'Enter your name...',
+                  pattern: '^.*\S.*$',
+                  autofocus: 'true',
+                  required: 'true' }
+          %small{ id: 'loginHelp', class: 'form-text text-muted' }
+            For start game enter your name and submit form
+        %button{ class: 'btn btn-primary btn-block', type: 'submit' }
+          Let's play
