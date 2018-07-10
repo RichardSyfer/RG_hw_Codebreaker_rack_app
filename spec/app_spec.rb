@@ -60,7 +60,7 @@ feature App do
   describe 'page 404' do
     scenario 'show 404 error response if page not found' do
       visit '/nopage'
-        expect(page).to have_content 'Not found'
+      expect(page.status_code).to eq(404)
     end
   end
 end
