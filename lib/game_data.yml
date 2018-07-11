@@ -41,3 +41,10 @@
   :attempt_result: "+-"
   :attempts: '10'
   :hints_left: 0
+- :game_date: '2018-07-11'
+  :player_name: name
+  :result: lost
+  :secret_code: '1453'
+  :attempt_result: "+++"
+  :attempts: '10'
+  :hints_left: 3

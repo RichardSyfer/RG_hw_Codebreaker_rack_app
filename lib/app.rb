@@ -4,6 +4,7 @@ require 'haml'
 require 'yaml'
 require 'codebreaker'
 require_relative 'game_session_vars'
+require_relative 'routes'
 
 class App
   include GameSessionVars
@@ -20,18 +21,9 @@ class App
   end
 
   def response
-    case @request.path
-    when '/' then index
-    when '/check' then check_guess
-    when '/hint' then show_hint
-    when '/restart' then game_restart
-    when '/save' then save_game_result
-    when '/scores' then show_scores
-    else Rack::Response.new(render('404'), 404)
-    end
+    page = Routes::APP_ROUTES[@request.path]
+    page ? page.call(self) : Rack::Response.new(render('404'), 404)
   end
-
-  private
 
   def index
     if @request.params['player_name']
