@@ -1,0 +1,13 @@
+-if guess
+  .table-log-wrapper.text-center
+    %h5="Remaining attempts: #{game.attempts_remain}"
+    %table{ id: 'game_log', class: 'table table-striped  text-center' }
+      %thead
+        %tr
+          %th{ scope: 'col'} Your guess</th>
+          %th{ scope: 'col'} Result of your guess
+      %tbody
+        - game_log.reverse.each do |line|
+          %tr
+            %td= line.first
+            %td= line.last

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Codebreaker
+    %link{ rel: 'shortcut icon', href: 'img/favicon/favicon.ico', type: 'image/x-icon' }
+    %link{ rel: 'stylesheet', href: '/stylesheets/bootstrap.min.css', type: 'text/css' }
+    %link{ rel: 'stylesheet', href: '/stylesheets/main.css', type: 'text/css' }
+  %body
+    .container
+      .row
+        .col
+          .header.text-center
+            %h4 Codebreaker
+            %img{ class: 'logo',
+                  src: '/img/jigsaw.png',
+                  alt: 'I want to play a game',
+                  width: '72',
+                  height: '72' }
+      .row
+        .col.text-center
+          %h5 GAME SCORES
+          %table{ id: 'game_scores', class: 'table table-hover' }
+            %tr.info
+              %th Date
+              %th Player name
+              %th Attempts
+              %th Game result
+              %th Secret code
+              %th Remaining hints
+            - @scores.each do |record|
+              %tr
+                %td= record[:game_date]
+                %td= record[:player_name]
+                %td= record[:attempts]
+                %td= record[:result]
+                %td= record[:secret_code]
+                %td= record[:hints_left]
+          %br
+          %p
+            %a{ href: '/', class: 'btn btn-primary btn-block' }
+              Back

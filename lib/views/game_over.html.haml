@@ -1,0 +1,22 @@
+.row
+  .col.text-center
+    - if game.won?
+      %h5
+        Superb game! You won,
+        %strong= player_name
+    - else
+      %h5
+        Sorry,
+        %strong= player_name
+        , but you lost :(
+        %br
+        code was
+        %strong= game.secret_code
+%br
+.row
+  .col-3.offset-3
+    %form{ id: 'save-form', action: '/save', method: 'get' }
+      %input{ class: 'btn btn-primary btn-block', type: 'submit', value: 'Save results' }
+  .col-3
+    %form{ id: 'restart-form', action: '/restart', method: 'get' }
+      %input{ class: 'btn btn-primary btn-block', type: 'submit', value: 'Restart game' }

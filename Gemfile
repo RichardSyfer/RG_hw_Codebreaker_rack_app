@@ -2,10 +2,9 @@
 
 source "https://rubygems.org"
 
-group :development do
-  gem "codebreaker", git: "https://github.com/RichardSyfer/RG_hw_Codebreaker.git", branch: "feature/codebreaker"
-  gem "rack"
-end
+gem "codebreaker", git: "https://github.com/RichardSyfer/RG_hw_Codebreaker.git", branch: "feature/codebreaker"
+gem "rack"
+gem "haml"
 
 group :test do
   gem "rspec"
